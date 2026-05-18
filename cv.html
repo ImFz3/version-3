@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohammad Faza - CV</title>
+  <style>
+    /* CSS Palette Setup */
+    :root {
+      --ink: #16272b;
+      --muted: #5d6d70;
+      --paper: #fbf8f1;
+      --panel: #ffffff;
+      --line: #d9d1c2;
+      --teal: #1f5357;
+      --brick: #b15336;
+      --gold: #c49a48;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #f5f0e7;
+        --muted: #b4c3c5;
+        --paper: #101719;
+        --panel: #182529;
+        --line: #314347;
+        --teal: #8ed0cf;
+        --brick: #f0a277;
+        --gold: #f1c875;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .cv-header-controls {
+      width: 100%;
+      max-width: 210mm;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center; 
+      gap: 12px;           
+      margin-bottom: 15px;
+    }
+
+    .cv-lang-selector {
+      background: var(--panel);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .cv-lang-selector:hover {
+      border-color: var(--teal);
+    }
+
+    /* Base Containers */
+    .cv-container {
+      width: 100%;
+      max-width: 210mm;
+      min-height: 297mm;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    /* ==========================================================================
+       STANDARD LTR LAYOUT (English, French, Chinese)
+       ========================================================================== */
+    .ltr-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 297mm;
+    }
+
+    .sidebar {
+      background: color-mix(in srgb, var(--paper) 30%, var(--panel));
+      border-right: 1px solid var(--line);
+      padding: 40px 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .profile-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .profile-photo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--teal);
+      background: var(--paper);
+    }
+
+    .profile-block h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    /* Style the download button to exactly match your .cv-lang-selector */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--panel);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 200ms, background-color 200ms;
+    }
+
+    .download-btn:hover {
+      background-color: var(--paper);
+      border-color: var(--teal);
+    }
+
+    .download-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--muted);
+    }
+
+    .profile-block p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .sidebar-section h2 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--brick);
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 5px;
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+
+    .info-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .info-item strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .lang-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .lang-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .lang-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .lang-meta em {
+      font-style: normal;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .progress-bar {
+      background: color-mix(in srgb, var(--ink) 10%, transparent);
+      height: 4px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--teal);
+      height: 100%;
+    }
+
+    .skills-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-pill {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .main-content {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    .main-section h3 {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--teal);
+      border-bottom: 2px solid var(--teal);
+      padding-bottom: 6px;
+      margin-bottom: 25px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 20px;
+    }
+
+    .time-badge {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--brick);
+    }
+
+    .timeline-body h4 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .timeline-body em {
+      font-style: normal;
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .timeline-body ul {
+      list-style-type: none;
+    }
+
+    .timeline-body li {
+      font-size: 0.85rem;
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+    }
+
+    .timeline-body li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    /* ==========================================================================
+       SPECIALIZED ARABIC RTL LAYOUT (Clean Balanced Single Column Flow)
+       ========================================================================== */
+    .rtl-layout {
+      display: none; /* Hidden by default */
+      direction: rtl;
+      padding: 50px;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .rtl-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 25px;
+    }
+
+    .rtl-title h1 {
+      font-size: 2.2rem;
+      color: var(--teal);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .rtl-title p {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .rtl-contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      background: color-mix(in srgb, var(--paper) 30%, var(--panel));
+      padding: 15px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      font-size: 0.85rem;
+    }
+
+    .rtl-contact-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-bottom: 2px;
+    }
+
+    .rtl-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 45px;
+    }
+
+    .rtl-section-title {
+      font-size: 1.2rem;
+      color: var(--teal);
+      border-bottom: 2px solid var(--teal);
+      padding-bottom: 6px;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .rtl-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .rtl-timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 15px;
+    }
+
+    .rtl-time-badge {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--brick);
+    }
+
+    .rtl-timeline-body h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .rtl-timeline-body em {
+      font-style: normal;
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .rtl-timeline-body ul {
+      list-style-type: none;
+    }
+
+    .rtl-timeline-body li {
+      font-size: 0.9rem;
+      position: relative;
+      padding-right: 20px;
+      margin-bottom: 8px;
+    }
+
+    .rtl-timeline-body li::before {
+      content: "—";
+      position: absolute;
+      right: 0;
+      color: var(--gold);
+    }
+
+    .rtl-sidebar-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    /* Mobile Adapters */
+    @media (max-width: 780px) {
+      .ltr-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+      .rtl-layout {
+        padding: 25px 20px;
+      }
+      .rtl-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .rtl-contact-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+      .rtl-body-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+      .rtl-timeline-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+    }
+
+    /* ==========================================================================
+       Print / PDF Export Stabilization Rules (Complete Code Refactor)
+       ========================================================================== */
+    @media print {
+      :root {
+        color-scheme: dark !important;
+        --ink: #f5f0e7 !important;
+        --muted: #b4c3c5 !important;
+        --paper: #101719 !important;
+        --panel: #182529 !important;
+        --line: #314347 !important;
+        --teal: #8ed0cf !important;
+        --brick: #f0a277 !important;
+        --gold: #f1c875 !important;
+      }
+
+      /* Establish global canvas forcing rules */
+      html, body {
+        background-color: #101719 !important;
+        color: #f5f0e7 !important;
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important; 
+      }
+
+      /* Hide page management controls and margins */
+      @page {
+        size: A4 portrait;
+        margin: 0 !important;
+      }
+
+      .cv-header-controls { 
+        display: none !important; 
+      }
+
+      /* Eliminate the outer container border/shadow conflicts */
+      .cv-container { 
+        border: none !important; 
+        box-shadow: none !important; 
+        width: 210mm !important;
+        height: 297mm !important;
+        background-color: #182529 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        page-break-inside: avoid !important;
+      }
+
+      /* Base rules for elements conditionally visible based on DOM direction */
+      html[dir="ltr"] #cv-ltr-view {
+        display: grid !important;
+        grid-template-columns: 260px 1fr !important;
+        width: 210mm !important;
+        height: 297mm !important;
+      }
+      html[dir="ltr"] #cv-rtl-view {
+        display: none !important;
+      }
+
+      html[dir="rtl"] #cv-rtl-view {
+        display: grid !important;
+        grid-template-columns: 1fr 280px !important;
+        width: 210mm !important;
+        height: 297mm !important;
+      }
+      html[dir="rtl"] #cv-ltr-view {
+        display: none !important;
+      }
+
+      /* Direct raw assignments to ensure PDF engines execute background fills */
+      .sidebar {
+        background-color: #121b1d !important; 
+        border-right: 1px solid #314347 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .main-content {
+        background-color: #182529 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .rtl-contact-grid {
+        background-color: #121b1d !important;
+        border: 1px solid #314347 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Component rendering overrides */
+      .progress-bar {
+        background-color: rgba(245, 240, 231, 0.1) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .progress-fill {
+        background-color: #8ed0cf !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .skill-pill {
+        background-color: #182529 !important;
+        border: 1px solid #314347 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="cv-header-controls">
+    <a href="#" onclick="window.print(); return false;" class="download-btn">
+      <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4M7 10l5 5 5-5M12 15V3"/>
+      </svg>
+      <span data-key="downloadText">Download CV (PDF)</span>
+    </a>
+    
+    <select class="cv-lang-selector" aria-label="Language Control Panel">
+      <option value="en" selected>English</option>
+      <option value="fr">Français</option>
+      <option value="zh">中文</option>
+      <option value="ar">العربية</option>
+    </select>
+  </header>
+
+  <div class="cv-container">
+    
+    <div class="ltr-layout" id="cv-ltr-view">
+      
+      <aside class="sidebar">
+        <div class="profile-block">
+          <img class="profile-photo" src="assets/Headshot1.jpg" alt="Mohammad Faza Portrait">
+          <div>
+            <h1 data-key="name">Mohammad<br>Faza</h1>
+            <p data-key="subTitle">Multilingual Student</p>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h2 data-key="titleContact">Contact</h2>
+          <div class="info-list">
+            <div class="info-item">
+              <span data-key="labelPhone">Phone</span>
+              <strong>+33 7 73 53 89 41</strong>
+            </div>
+            <div class="info-item">
+              <span data-key="labelEmail">Email</span>
+              <strong>Fz3i@hotmail.com</strong>
+            </div>
+            <div class="info-item">
+              <span data-key="labelLocation">Location</span>
+              <strong data-key="valLocation">Bordeaux, France</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h2 data-key="titleLanguages">Languages</h2>
+          <div class="lang-stack">
+            <div class="lang-item">
+              <div class="lang-meta"><span data-key="langArabic">Arabic</span> <em data-key="levelNative">Native</em></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-meta"><span data-key="langEnglish">English</span> <em data-key="levelFluent">Fluent</em></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-meta"><span data-key="langMandarin">Mandarin</span> <em>HSK 4</em></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-meta"><span data-key="langFrench">French</span> <em data-key="levelIntermediate">A1-A2 / Beginner</em></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 20%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h2 data-key="titleSkills">Core Skills</h2>
+          <div class="skills-pills">
+            <span class="skill-pill" data-key="skillComms">Multilingual Comms</span>
+            <span class="skill-pill" data-key="skillAdapt">Adaptability</span>
+            <span class="skill-pill" data-key="skillLearn">Independent Learning</span>
+            <span class="skill-pill" data-key="skillProblem">Problem Solving</span>
+            <span class="skill-pill" data-key="skillResearch">Academic Research</span>
+            <span class="skill-pill" data-key="skillCulture">Cross-Cultural Collaboration</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <section class="main-section">
+          <h3 data-key="mainHeading">Education & Experience</h3>
+          <div class="timeline">
+            
+            <div class="timeline-item">
+              <div class="time-badge">2024 / 2026</div>
+              <div class="timeline-body">
+                <h4 data-key="frTitle">Independent Student</h4>
+                <em data-key="frLoc">Bordeaux, France</em>
+                <ul>
+                  <li data-key="frBullet1">Continuing French language development and academic preparation in France.</li>
+                  <li data-key="frBullet2">Managing administrative, relocation, and educational processes entirely independently.</li>
+                  <li data-key="frBullet3">Consistently developing high-level adaptability and practical problem-solving strategies in a new linguistic environment.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="time-badge">2023 / 2024</div>
+              <div class="timeline-body">
+                <h4 data-key="zhTitle">Chinese Language Student</h4>
+                <em data-key="zhLoc">Xi'an Jiaotong University (XJTU) — Xi'an, China</em>
+                <ul>
+                  <li data-key="zhBullet1">Studied Mandarin Chinese within an intensive, immersive international academic environment.</li>
+                  <li data-key="zhBullet2">Achieved confirmed HSK 4 level proficiency in Mandarin Chinese.</li>
+                  <li data-key="zhBullet3">Expanded intercultural agility and communicative confidence through collaboration with international peers.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="time-badge">2020 / 2022</div>
+              <div class="timeline-body">
+                <h4 data-key="kwTitle">Top Graduate</h4>
+                <em data-key="kwLoc">High School — Kuwait</em>
+                <ul>
+                  <li data-key="kwBullet1">Graduated top of the class cohort with an outstanding cumulative average of 91.93%.</li>
+                  <li data-key="kwBullet2">Demonstrated exceptional academic performance and rigorous consistency across all core subjects.</li>
+                  <li data-key="kwBullet3">Laid down a strong analytical foundation, beginning independent multi-language study patterns.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </main>
+
+    </div>
+
+    <div class="rtl-layout" id="cv-rtl-view">
+      
+      <div class="rtl-header">
+        <div class="rtl-title">
+          <h1>محمد فزع</h1>
+          <p>طالب متعدد اللغات</p>
+        </div>
+        <img class="profile-photo" src="assets/Headshot1.jpg" alt="محمد فزع">
+      </div>
+
+      <div class="rtl-contact-grid">
+        <div class="rtl-contact-item"><span>الهاتف</span><strong>+33 7 73 53 89 41</strong></div>
+        <div class="rtl-contact-item"><span>البريد الإلكتروني</span><strong>Fz3i@hotmail.com</strong></div>
+        <div class="rtl-contact-item"><span>الموقع</span><strong>بوردو، فرنسا</strong></div>
+      </div>
+
+      <div class="rtl-body-grid">
+        
+        <main>
+          <h3 class="rtl-section-title">التعليم والخبرة</h3>
+          <div class="rtl-timeline">
+            
+            <div class="rtl-timeline-item">
+              <div class="rtl-time-badge">2024 / 2026</div>
+              <div class="rtl-timeline-body">
+                <h4>طالب مستقل</h4>
+                <em>بوردو، فرنسا</em>
+                <ul>
+                  <li>مواصلة تطوير اللغة الفرنسية والتحضير الأكاديمي في فرنسا.</li>
+                  <li>إدارة المعاملات الإدارية، الانتقال، والإجراءات التعليمية بشكل مستقل تمامًا.</li>
+                  <li>تطوير مستمر للقدرة العالية على التكيف واستراتيجيات حل المشكلات العملية في بيئة لغوية جديدة.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rtl-timeline-item">
+              <div class="rtl-time-badge">2023 / 2024</div>
+              <div class="rtl-timeline-body">
+                <h4>طالب لغة صينية</h4>
+                <em>جامعة شيان جيوتونغ (XJTU) — شيان، الصين</em>
+                <ul>
+                  <li>دراسة اللغة الصينية الماندارين في بيئة أكاديمية دولية مكثفة.</li>
+                  <li>اجتياز الكفاءة اللغوية المؤكدة لمستوى HSK 4 في الصينية.</li>
+                  <li>تعزيز المرونة الثقافية المتبادلة وثقة التواصل من خلال التفاعل مع الزملاء الدوليين.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rtl-timeline-item">
+              <div class="rtl-time-badge">2020 / 2022</div>
+              <div class="rtl-timeline-body">
+                <h4>خريج متفوق</h4>
+                <em>المرحلة الثانوية — الكويت</em>
+                <ul>
+                  <li>التخرج في المرتبة الأولى على مستوى الدفعة بمعدل تراكمي متميز بلغت نسبته 91.93%.</li>
+                  <li>إثبات أداء أكاديمي استثنائي وانضباط صارم في جميع المواد الأساسية.</li>
+                  <li>تأسيس قاعدة تحليلية قوية وبداية أنماط التعلم الذاتي اللغوي المستقل.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </main>
+
+        <aside class="rtl-sidebar-stack">
+          <div>
+            <h3 class="rtl-section-title">اللغات</h3>
+            <div class="lang-stack">
+              <div class="lang-item"><div class="lang-meta"><span>العربية</span> <em>اللغة الأم</em></div><div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div></div>
+              <div class="lang-item"><div class="lang-meta"><span>الإنجليزية</span> <em>طليق</em></div><div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div></div>
+              <div class="lang-item"><div class="lang-meta"><span>الصينية</span> <em>HSK 4</em></div><div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div></div>
+              <div class="lang-item"><div class="lang-meta"><span>الفرنسية</span> <em>مبتدئ / A1-A2</em></div><div class="progress-bar"><div class="progress-fill" style="width: 20%"></div></div></div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="rtl-section-title">المهارات الأساسية</h3>
+            <div class="skills-pills">
+              <span class="skill-pill">التواصل متعدد اللغات</span>
+              <span class="skill-pill">القدرة على التكيف</span>
+              <span class="skill-pill">التعلم المستقل</span>
+              <span class="skill-pill">حل المشكلات</span>
+              <span class="skill-pill">البحث الأكاديمي</span>
+              <span class="skill-pill">التعاون بين الثقافات</span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    const cvTranslations = {
+      en: {
+        downloadText: "Download CV (PDF)",
+        name: "Mohammad<br>Faza", subTitle: "Multilingual Student", titleContact: "Contact",
+        labelPhone: "Phone", labelEmail: "Email", labelLocation: "Location", valLocation: "Bordeaux, France",
+        titleLanguages: "Languages", langArabic: "Arabic", langEnglish: "English", langMandarin: "Mandarin", langFrench: "French",
+        levelNative: "Native", levelFluent: "Fluent", levelIntermediate: "A1-A2 / Beginner",
+        titleSkills: "Core Skills", skillComms: "Multilingual Comms", skillAdapt: "Adaptability", skillLearn: "Independent Learning", skillProblem: "Problem Solving", skillResearch: "Academic Research", skillCulture: "Cross-Cultural Collaboration",
+        mainHeading: "Education & Experience",
+        frTitle: "Independent Student", frLoc: "Bordeaux, France", frBullet1: "Continuing French language development and academic preparation in France.", frBullet2: "Managing administrative, relocation, and educational processes entirely independently.", frBullet3: "Consistently developing high-level adaptability and practical problem-solving strategies in a new linguistic environment.",
+        zhTitle: "Chinese Language Student", zhLoc: "Xi'an Jiaotong University (XJTU) — Xi'an, China", zhBullet1: "Studied Mandarin Chinese within an intensive, immersive international academic environment.", zhBullet2: "Achieved confirmed HSK 4 level proficiency in Mandarin Chinese.", zhBullet3: "Expanded intercultural agility and communicative confidence through collaboration with international peers.",
+        kwTitle: "Top Graduate", kwLoc: "High School — Kuwait", kwBullet1: "Graduated top of the class cohort with an outstanding cumulative average of 91.93%.", kwBullet2: "Demonstrated exceptional academic performance and rigorous consistency across all core subjects.", kwBullet3: "Laid down a strong analytical foundation, beginning independent multi-language study patterns."
+      },
+      fr: {
+        downloadText: "Télécharger le CV (PDF)",
+        name: "Mohammad<br>Faza", subTitle: "Étudiant Multilingue", titleContact: "Contact",
+        labelPhone: "Téléphone", labelEmail: "E-mail", labelLocation: "Localisation", valLocation: "Bordeaux, France",
+        titleLanguages: "Langues", langArabic: "Arabe", langEnglish: "Anglais", langMandarin: "Mandarin", langFrench: "Français",
+        levelNative: "Langue maternelle", levelFluent: "Courant", levelIntermediate: "A1-A2 / Débutant",
+        titleSkills: "Compétences clés", skillComms: "Comms Multilingues", skillAdapt: "Adaptabilité", skillLearn: "Apprentissage Autonome", skillProblem: "Résolution de Problèmes", skillResearch: "Recherche Académique", skillCulture: "Collaboration Interculturelle",
+        mainHeading: "Éducation & Expérience",
+        frTitle: "Étudiant Indépendant", frLoc: "Bordeaux, France", frBullet1: "Poursuite du développement de la langue française et préparation académique en France.", frBullet2: "Gestion autonome des démarches administratives, de relocalisation et d'éducation.", frBullet3: "Développement continu d'une grande adaptabilité et de stratégies de résolution de problèmes concrets.",
+        zhTitle: "Étudiant en Langue Chinoise", zhLoc: "Université Xi'an Jiaotong (XJTU) — Xi'an, Chine", zhBullet1: "Étude du chinois mandarin dans un environnement académique international intensif.", zhBullet2: "Obtention du niveau certifié HSK 4 en chinois mandarin.", zhBullet3: "Développement de l'agilité interculturelle et de la confiance en communication avec des pairs internationaux.",
+        kwTitle: "Major de Promotion", kwLoc: "Lycée — Koweït", kwBullet1: "Diplômé major de sa promotion avec une excellente moyenne cumulative de 91,93%.", kwBullet2: "Excellence académique démontrée et rigueur constante dans toutes les matières principales.", kwBullet3: "Solide base analytique établie, initiant des habitudes d'apprentissage linguistique autonome."
+      },
+      zh: {
+        downloadText: "下载简历 (PDF)",
+        name: "Mohammad<br>Faza", subTitle: "多语言学生", titleContact: "联系方式",
+        labelPhone: "电话", labelEmail: "电子邮箱", labelLocation: "地点", valLocation: "法国波尔多",
+        titleLanguages: "语言能力", langArabic: "阿拉伯语", langEnglish: "英语", langMandarin: "普通话", langFrench: "法语",
+        levelNative: "母语", levelFluent: "流利", levelIntermediate: "A1-A2 / 初学者",
+        titleSkills: "核心能力", skillComms: "多语言沟通", skillAdapt: "适应能力", skillLearn: "自主学习", skillProblem: "解决问题", skillResearch: "学术研究", skillCulture: "跨文化合作",
+        mainHeading: "教育与经历",
+        frTitle: "独立学生", frLoc: "法国波尔多", frBullet1: "在法国继续进行法语语言提升与学术准备。", frBullet2: "完全独立地处理行政、搬迁以及教育流程。", frBullet3: "在全新的语言环境中不断培养高水平的适应能力与实际问题解决策略。",
+        zhTitle: "语言留学生", zhLoc: "西安交通大学 (XJTU) — 中国西安", zhBullet1: "在密集的国际化封闭式学术环境中学习普通话。", zhBullet2: "成功考取汉办普通话 HSK 4 级证书。", zhBullet3: "通过与国际同学通力协作，极大地拓展了跨文化敏纬度与沟通自信心。",
+        kwTitle: "优秀毕业生", kwLoc: "高中 — 科威特", kwBullet1: "以 91.93% 的优异累计总分荣登班级毕业生榜首。", kwBullet2: "在所有核心学术科目中均表现出优异的学业成绩与严谨的一致性。", kwBullet3: "打下了坚实的逻辑分析基础，并开启了独立的多语言学习模式。"
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const selector = document.querySelector('.cv-lang-selector');
+      const ltrView = document.getElementById('cv-ltr-view');
+      const rtlView = document.getElementById('cv-rtl-view');
+
+      if (!selector || !ltrView || !rtlView) return;
+
+      // Set initial direction baseline for print safety
+      document.documentElement.setAttribute('dir', 'ltr');
+
+      selector.addEventListener('change', (e) => {
+        const lang = e.target.value;
+
+        if (lang === 'ar') {
+          document.querySelector('[data-key="downloadText"]').innerHTML = "تحميل السيرة الذاتية (PDF)";
+          ltrView.style.display = 'none';
+          rtlView.style.display = 'flex';
+          document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+          rtlView.style.display = 'none';
+          ltrView.style.display = 'grid';
+          document.documentElement.setAttribute('dir', 'ltr');
+
+          const content = cvTranslations[lang];
+          if (content) {
+            document.querySelectorAll('[data-key]').forEach(el => {
+              const key = el.getAttribute('data-key');
+              if (content[key]) {
+                el.innerHTML = content[key];
+              }
+            });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

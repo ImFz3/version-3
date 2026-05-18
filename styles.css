@@ -1,0 +1,811 @@
+:root {
+  --ink: #16272b;
+  --muted: #5d6d70;
+  --paper: #fbf8f1;
+  --panel: #ffffff;
+  --line: #d9d1c2;
+  --teal: #1f5357;
+  --brick: #b15336;
+  --gold: #c49a48;
+  --shadow: 0 20px 60px rgba(22, 39, 43, 0.12);
+}
+
+:root[data-theme="dark"] {
+  --ink: #f5f0e7;
+  --muted: #b4c3c5;
+  --paper: #101719;
+  --panel: #182529;
+  --line: #314347;
+  --teal: #8ed0cf;
+  --brick: #f0a277;
+  --gold: #f1c875;
+  --shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px clamp(20px, 5vw, 72px);
+  border-bottom: 1px solid rgba(22, 39, 43, 0.08);
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.brand,
+.nav,
+.header-actions,
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  gap: 10px;
+  min-width: max-content;
+  font-weight: 750;
+}
+
+.brand-photo {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--paper) 76%, var(--ink));
+  box-shadow: 0 8px 24px rgba(22, 39, 43, 0.16);
+  object-fit: cover;
+}
+
+.header-actions {
+  gap: clamp(14px, 3vw, 34px);
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.nav {
+  gap: clamp(12px, 3vw, 28px);
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.controls {
+  gap: 8px;
+}
+
+.language-select,
+.theme-toggle {
+  height: 38px;
+  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 750;
+}
+
+.language-select {
+  min-width: 72px;
+  padding: 0 10px;
+}
+
+.theme-toggle {
+  display: grid;
+  width: 42px;
+  place-items: center;
+  cursor: pointer;
+}
+
+.nav a {
+  border-bottom: 2px solid transparent;
+  padding-block: 6px;
+}
+
+.nav a:hover,
+.nav a.active {
+  border-color: var(--brick);
+  color: var(--ink);
+}
+
+.hero {
+  display: grid;
+  min-height: calc(100vh - 75px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  gap: clamp(28px, 5vw, 76px);
+  align-items: center;
+  padding: clamp(38px, 7vw, 84px) clamp(20px, 5vw, 72px) 40px;
+}
+
+.hero-copy {
+  max-width: 690px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--brick);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 22px;
+  font-size: clamp(3.2rem, 7vw, 6.8rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3.7rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin-bottom: 7px;
+  font-size: 1.08rem;
+}
+
+.lead {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: clamp(1.08rem, 2vw, 1.36rem);
+}
+
+.hero-actions,
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 750;
+}
+
+.button.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.button.secondary {
+  color: var(--ink);
+}
+
+.button.ghost {
+  border-color: transparent;
+  color: var(--muted);
+}
+
+.hero-media {
+  margin: 0;
+}
+
+.hero-media img {
+  display: block;
+  width: 100%;
+  min-height: 280px;
+  max-height: 690px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.section {
+  padding: clamp(72px, 9vw, 126px) clamp(20px, 5vw, 72px);
+  border-top: 1px solid rgba(22, 39, 43, 0.08);
+}
+
+.section-heading {
+  display: grid;
+  max-width: 1120px;
+  grid-template-columns: minmax(170px, 0.36fr) minmax(0, 1fr);
+  gap: clamp(18px, 5vw, 64px);
+  align-items: start;
+  margin-bottom: clamp(28px, 5vw, 56px);
+}
+
+.about-grid {
+  display: grid;
+  max-width: 1120px;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: start;
+}
+
+.about-grid > p {
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
+
+.stat-panel {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--line);
+}
+
+.stat-panel div {
+  display: grid;
+  gap: 4px;
+  padding: 24px;
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+}
+
+.stat-panel strong {
+  color: var(--teal);
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.stat-panel span,
+.meta,
+.timeline-item p,
+.language-list,
+.pill-grid {
+  color: var(--muted);
+}
+
+.timeline {
+  display: grid;
+  max-width: 1030px;
+  margin-left: auto;
+  gap: 18px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: clamp(18px, 4vw, 42px);
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+
+.timeline-item time {
+  color: var(--brick);
+  font-weight: 800;
+}
+
+.meta {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.skills-section {
+  background: color-mix(in srgb, var(--teal) 12%, var(--paper));
+}
+
+.skills-layout {
+  display: grid;
+  max-width: 1120px;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
+.skill-block {
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--panel) 64%, transparent);
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.language-list {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.language-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgba(22, 39, 43, 0.1);
+  padding-bottom: 12px;
+}
+
+.language-list strong {
+  color: var(--ink);
+}
+
+.pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.pill-grid span {
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel) 60%, transparent);
+  padding: 10px 13px;
+  font-weight: 700;
+}
+
+.contact-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1fr);
+  gap: clamp(26px, 6vw, 72px);
+  align-items: start;
+  padding: clamp(72px, 9vw, 126px) clamp(20px, 5vw, 72px);
+  background: #132326;
+  color: #fbf8f1;
+}
+
+.contact-section .eyebrow {
+  color: #f1b767;
+}
+
+.contact-link {
+  display: grid;
+  min-width: min(100%, 260px);
+  gap: 4px;
+  border: 1px solid rgba(251, 248, 241, 0.18);
+  border-radius: 8px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.contact-link span {
+  color: rgba(251, 248, 241, 0.62);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.contact-link strong {
+  overflow-wrap: anywhere;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px clamp(20px, 5vw, 72px);
+  background: #101c1f;
+  color: rgba(251, 248, 241, 0.78);
+}
+
+.site-footer a {
+  color: var(--paper);
+  font-weight: 750;
+}
+
+[dir="rtl"] .timeline {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+[dir="ltr"] .hero-media img {
+  transform: none;
+}
+
+@media (max-width: 860px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .header-actions {
+    width: 100%;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hero,
+  .about-grid,
+  .skills-layout,
+  .contact-section,
+  .section-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-media img {
+    min-height: 320px;
+  }
+
+  .timeline {
+    margin-left: 0;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav {
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .controls {
+    width: 100%;
+  }
+
+  .language-select {
+    flex: 1;
+  }
+
+  h1 {
+    font-size: clamp(2.7rem, 15vw, 4rem);
+  }
+
+  .button,
+  .hero-actions,
+  .contact-actions {
+    width: 100%;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
+}
+/* ==========================================================================
+   Premium Interactive Project Route Styling
+   ========================================================================== */
+
+.hero-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 340px;
+  /* Adds a smooth glowing backdrop glow matching your accent styles */
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--teal) 8%, transparent) 0%, transparent 70%);
+  border-radius: 16px;
+}
+
+.interactive-route {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 520px;
+  padding: 60px 20px;
+  margin: 0 auto;
+  direction: ltr; /* Keeps the map chronology identical across translations */
+}
+
+/* Elegant dashed path line linking nodes */
+.route-line {
+  position: absolute;
+  top: 50%;
+  left: 35px;
+  right: 35px;
+  height: 2px;
+  background: repeating-linear-gradient(to right, var(--brick) 0, var(--brick) 6px, transparent 6px, transparent 12px);
+  opacity: 0.4;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Individual node positioning */
+.route-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Floating Country Flags */
+.node-icon {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Clickable glowing timeline point */
+.node-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--panel);
+  border: 4px solid var(--brick);
+  box-shadow: 0 0 0 0px color-mix(in srgb, var(--brick) 30%, transparent), var(--shadow);
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1), 
+              background-color 250ms ease, 
+              box-shadow 250ms ease;
+}
+
+.node-label {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  font-weight: 750;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  transition: color 250ms ease, transform 250ms ease;
+}
+
+/* Fancy Hover Kinetics */
+.route-node:hover .node-icon {
+  transform: translateY(-6px) scale(1.15);
+}
+
+.route-node:hover .node-dot {
+  transform: scale(1.3);
+  background-color: var(--brick);
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--brick) 18%, transparent);
+}
+
+.route-node:hover .node-label {
+  color: var(--ink);
+  transform: translateY(2px);
+}
+
+/* Tooltip information pop-ups */
+.route-card {
+  position: absolute;
+  bottom: calc(100% + 24px);
+  /* The Secret: Center anchor using clean transitions regardless of LTR/RTL */
+  left: 50%;
+  transform: translate(-50%, 12px);
+  width: 250px;
+  background: var(--panel);
+  border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1), 
+              transform 300ms cubic-bezier(0.23, 1, 0.32, 1), 
+              visibility 300ms;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Tooltip information pop-ups */
+.route-card {
+  position: absolute;
+  bottom: calc(100% + 24px);
+  left: 50%;
+  transform: translateX(-50%) translateY(12px); /* Standard positioning base */
+  width: 250px;
+  background: var(--panel);
+  border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1), 
+              transform 300ms cubic-bezier(0.23, 1, 0.32, 1), 
+              visibility 300ms;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Pointer arrow under the tooltip card */
+.route-card::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%); /* Locks the arrow perfectly down the center line */
+  width: 0;
+  height: 0;
+  border-width: 7px;
+  border-style: solid;
+  border-color: var(--panel) transparent transparent transparent;
+}
+
+/* Make tooltip smoothly slide down and fade in when hovered */
+.route-node:hover .route-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   Multi-Language Dynamic Adjustments
+   ========================================================================== */
+
+/* Flip the chronology of the milestones naturally in Arabic without losing pin position */
+:root[lang="ar"] .interactive-route {
+  flex-direction: row-reverse;
+}
+
+/* Make the text inside the card read right-to-left for Arabic users */
+:root[lang="ar"] .route-card {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Fix the structural transform reference for RTL to avoid the shrinking box bug */
+:root[lang="ar"] .route-card,
+:root[lang="ar"] .route-card::after {
+  left: 50%;
+  right: auto;
+}
+/* ==========================================================================
+   Premium SVG Vector Journey Map Styling
+   ========================================================================== */
+
+.hero-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.journey-map-svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  overflow: visible;
+}
+
+/* Styling the city name tags inside the SVG artwork */
+.map-label {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 750;
+  fill: var(--ink);
+  text-anchor: middle;
+  letter-spacing: 0.02em;
+  transition: fill 250ms ease;
+}
+
+/* Interactive Node Hover effects */
+.map-node {
+  cursor: pointer;
+}
+
+.node-ring {
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), r 300ms ease, stroke-width 300ms ease;
+  transform-origin: center;
+}
+
+.map-node:hover .node-ring {
+  r: 28px;
+  stroke-width: 3px;
+}
+
+.map-node:hover .map-label {
+  fill: var(--brick);
+}
+
+/* Kinetic dash stroke animation across the connection path */
+.map-track-filled {
+  stroke-dashoffset: 100;
+  animation: routeTravel 30s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes routeTravel {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ==========================================================================
+   Arabic RTL Mirroring Fix for SVG Journey Map
+   ========================================================================== */
+
+/* Cleanly mirror the map path structure horizontally in Arabic */
+[dir="rtl"] .journey-map-svg {
+  transform: scaleX(-1);
+}
+
+/* Un-mirror the text labels natively using their local bounding box */
+[dir="rtl"] .map-label {
+  transform: scaleX(-1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+/* ==========================================================================
+   Premium Language Progress & Core Skill Styling
+   ========================================================================== */
+
+.languages-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.lang-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lang-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.progress-bar {
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: var(--teal);
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Transform standard pills into interactive kinetic chips */
+.pill-grid .skill-chip {
+  cursor: default;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pill-grid .skill-chip:hover {
+  background: var(--brick);
+  color: var(--paper);
+  border-color: var(--brick);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Flip headers correctly for RTL layout */
+[dir="rtl"] .lang-header {
+  flex-direction: row-reverse;
+}
