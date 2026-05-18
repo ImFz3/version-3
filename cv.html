@@ -459,8 +459,8 @@
       }
     }
 
-    /* ==========================================================================
-       Print / PDF Export Stabilization Rules (Complete Code Refactor)
+   /* ==========================================================================
+       Print / PDF Export Stabilization Rules (Fixed Canvas Overrides)
        ========================================================================== */
     @media print {
       :root {
@@ -475,7 +475,12 @@
         --gold: #f1c875 !important;
       }
 
-      /* Establish global canvas forcing rules */
+      @page {
+        size: A4 portrait;
+        margin: 0 !important;
+      }
+
+      /* Clean reset strictly applied only during print engine compilation */
       html, body {
         background-color: #101719 !important;
         color: #f5f0e7 !important;
@@ -486,73 +491,124 @@
         margin: 0 !important;
         padding: 0 !important;
         overflow: hidden !important; 
-      }
-
-      /* Hide page management controls and margins */
-      @page {
-        size: A4 portrait;
-        margin: 0 !important;
+        display: block !important;
       }
 
       .cv-header-controls { 
         display: none !important; 
       }
 
-      /* Eliminate the outer container border/shadow conflicts */
+      /* Force outer wrapper to cleanly anchor to top left of the print canvas */
       .cv-container { 
         border: none !important; 
         box-shadow: none !important; 
         width: 210mm !important;
         height: 297mm !important;
+        max-width: 210mm !important;
+        min-height: 297mm !important;
         background-color: #182529 !important;
         margin: 0 !important;
         padding: 0 !important;
         page-break-inside: avoid !important;
       }
 
-      /* Base rules for elements conditionally visible based on DOM direction */
+      /* --- LTR Print Enforcement --- */
       html[dir="ltr"] #cv-ltr-view {
         display: grid !important;
         grid-template-columns: 260px 1fr !important;
         width: 210mm !important;
         height: 297mm !important;
       }
-      html[dir="ltr"] #cv-rtl-view {
+      
+      html[dir="rtl"] #cv-rtl-view {
         display: none !important;
       }
 
+      html[dir="ltr"] .sidebar {
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: #121b1d !important; 
+        border-right: 1px solid #314347 !important;
+        border-bottom: none !important;
+        padding: 40px 25px !important;
+      }
+
+      /* --- RTL Print Enforcement (Mirrored Grid Fix for Cut-off) --- */
       html[dir="rtl"] #cv-rtl-view {
-        display: grid !important;
-        grid-template-columns: 1fr 280px !important;
+        display: grid !important; /* Switch to grid to manage structural height bounds */
+        grid-template-columns: 1fr 260px !important; /* Mirrored desktop distribution */
+        grid-template-rows: auto 1fr !important;
         width: 210mm !important;
         height: 297mm !important;
+        padding: 0 !important; /* Let the nested blocks handle spacing natively */
+        gap: 0 !important;
       }
+      
       html[dir="rtl"] #cv-ltr-view {
         display: none !important;
       }
 
-      /* Direct raw assignments to ensure PDF engines execute background fills */
-      .sidebar {
-        background-color: #121b1d !important; 
-        border-right: 1px solid #314347 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+      /* Span header clean across the grid top */
+      html[dir="rtl"] .rtl-header {
+        grid-column: 1 / span 2 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 40px 40px 20px 40px !important;
+        border-bottom: 1px solid #314347 !important;
+        gap: 0 !important;
       }
-      
+
+      /* Span contact information row across the grid layout center */
+      html[dir="rtl"] .rtl-contact-grid {
+        grid-column: 1 / span 2 !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        width: calc(100% - 80px) !important;
+        margin: 20px 40px 0 40px !important;
+        background-color: #121b1d !important;
+        border: 1px solid #314347 !important;
+        gap: 20px !important;
+        padding: 12px 20px !important;
+      }
+
+      /* Remap body grid split to cleanly divide into standard vertical lanes */
+      html[dir="rtl"] .rtl-body-grid {
+        grid-column: 1 / span 2 !important;
+        display: grid !important;
+        grid-template-columns: 1fr 260px !important;
+        gap: 0 !important;
+        height: 100% !important;
+      }
+
+      html[dir="rtl"] .rtl-body-grid > main {
+        padding: 25px 40px 40px 30px !important;
+      }
+
+      html[dir="rtl"] .rtl-sidebar-stack {
+        background-color: #121b1d !important; 
+        border-left: 1px solid #314347 !important;
+        border-right: none !important;
+        padding: 25px 25px 40px 25px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+      }
+
+      html[dir="rtl"] .rtl-timeline-item {
+        display: grid !important;
+        grid-template-columns: 100px 1fr !important;
+        gap: 15px !important;
+      }
+
+      /* Component rendering structural details */
       .main-content {
         background-color: #182529 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
 
-      .rtl-contact-grid {
-        background-color: #121b1d !important;
-        border: 1px solid #314347 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      /* Component rendering overrides */
       .progress-bar {
         background-color: rgba(245, 240, 231, 0.1) !important;
         -webkit-print-color-adjust: exact !important;
@@ -662,20 +718,20 @@
         <section class="main-section">
           <h3 data-key="mainHeading">Education & Experience</h3>
           <div class="timeline">
-            
+
             <div class="timeline-item">
-              <div class="time-badge">2024 / 2026</div>
+              <div class="time-badge">2020 / 2022</div>
               <div class="timeline-body">
-                <h4 data-key="frTitle">Independent Student</h4>
-                <em data-key="frLoc">Bordeaux, France</em>
+                <h4 data-key="kwTitle">Top Graduate</h4>
+                <em data-key="kwLoc">High School — Kuwait</em>
                 <ul>
-                  <li data-key="frBullet1">Continuing French language development and academic preparation in France.</li>
-                  <li data-key="frBullet2">Managing administrative, relocation, and educational processes entirely independently.</li>
-                  <li data-key="frBullet3">Consistently developing high-level adaptability and practical problem-solving strategies in a new linguistic environment.</li>
+                  <li data-key="kwBullet1">Graduated top of the class cohort with an outstanding cumulative average of 91.93%.</li>
+                  <li data-key="kwBullet2">Demonstrated exceptional academic performance and rigorous consistency across all core subjects.</li>
+                  <li data-key="kwBullet3">Laid down a strong analytical foundation, beginning independent multi-language study patterns.</li>
                 </ul>
               </div>
             </div>
-
+            
             <div class="timeline-item">
               <div class="time-badge">2023 / 2024</div>
               <div class="timeline-body">
@@ -690,14 +746,14 @@
             </div>
 
             <div class="timeline-item">
-              <div class="time-badge">2020 / 2022</div>
+              <div class="time-badge">2024 / 2026</div>
               <div class="timeline-body">
-                <h4 data-key="kwTitle">Top Graduate</h4>
-                <em data-key="kwLoc">High School — Kuwait</em>
+                <h4 data-key="frTitle">Independent Student</h4>
+                <em data-key="frLoc">Bordeaux, France</em>
                 <ul>
-                  <li data-key="kwBullet1">Graduated top of the class cohort with an outstanding cumulative average of 91.93%.</li>
-                  <li data-key="kwBullet2">Demonstrated exceptional academic performance and rigorous consistency across all core subjects.</li>
-                  <li data-key="kwBullet3">Laid down a strong analytical foundation, beginning independent multi-language study patterns.</li>
+                  <li data-key="frBullet1">Continuing French language development and academic preparation in France.</li>
+                  <li data-key="frBullet2">Managing administrative, relocation, and educational processes entirely independently.</li>
+                  <li data-key="frBullet3">Consistently developing high-level adaptability and practical problem-solving strategies in a new linguistic environment.</li>
                 </ul>
               </div>
             </div>
@@ -729,20 +785,20 @@
         <main>
           <h3 class="rtl-section-title">التعليم والخبرة</h3>
           <div class="rtl-timeline">
-            
+
             <div class="rtl-timeline-item">
-              <div class="rtl-time-badge">2024 / 2026</div>
+              <div class="rtl-time-badge">2020 / 2022</div>
               <div class="rtl-timeline-body">
-                <h4>طالب مستقل</h4>
-                <em>بوردو، فرنسا</em>
+                <h4>خريج متفوق</h4>
+                <em>المرحلة الثانوية — الكويت</em>
                 <ul>
-                  <li>مواصلة تطوير اللغة الفرنسية والتحضير الأكاديمي في فرنسا.</li>
-                  <li>إدارة المعاملات الإدارية، الانتقال، والإجراءات التعليمية بشكل مستقل تمامًا.</li>
-                  <li>تطوير مستمر للقدرة العالية على التكيف واستراتيجيات حل المشكلات العملية في بيئة لغوية جديدة.</li>
+                  <li>التخرج في المرتبة الأولى على مستوى الدفعة بمعدل تراكمي متميز بلغت نسبته 91.93%.</li>
+                  <li>إثبات أداء أكاديمي استثنائي وانضباط صارم في جميع المواد الأساسية.</li>
+                  <li>تأسيس قاعدة تحليلية قوية وبداية أنماط التعلم الذاتي اللغوي المستقل.</li>
                 </ul>
               </div>
             </div>
-
+            
             <div class="rtl-timeline-item">
               <div class="rtl-time-badge">2023 / 2024</div>
               <div class="rtl-timeline-body">
@@ -757,14 +813,14 @@
             </div>
 
             <div class="rtl-timeline-item">
-              <div class="rtl-time-badge">2020 / 2022</div>
+              <div class="rtl-time-badge">2024 / 2026</div>
               <div class="rtl-timeline-body">
-                <h4>خريج متفوق</h4>
-                <em>المرحلة الثانوية — الكويت</em>
+                <h4>طالب مستقل</h4>
+                <em>بوردو، فرنسا</em>
                 <ul>
-                  <li>التخرج في المرتبة الأولى على مستوى الدفعة بمعدل تراكمي متميز بلغت نسبته 91.93%.</li>
-                  <li>إثبات أداء أكاديمي استثنائي وانضباط صارم في جميع المواد الأساسية.</li>
-                  <li>تأسيس قاعدة تحليلية قوية وبداية أنماط التعلم الذاتي اللغوي المستقل.</li>
+                  <li>مواصلة تطوير اللغة الفرنسية والتحضير الأكاديمي في فرنسا.</li>
+                  <li>إدارة المعاملات الإدارية، الانتقال، والإجراءات التعليمية بشكل مستقل تمامًا.</li>
+                  <li>تطوير مستمر للقدرة العالية على التكيف واستراتيجيات حل المشكلات العملية في بيئة لغوية جديدة.</li>
                 </ul>
               </div>
             </div>
@@ -836,7 +892,7 @@
         levelNative: "母语", levelFluent: "流利", levelIntermediate: "A1-A2 / 初学者",
         titleSkills: "核心能力", skillComms: "多语言沟通", skillAdapt: "适应能力", skillLearn: "自主学习", skillProblem: "解决问题", skillResearch: "学术研究", skillCulture: "跨文化合作",
         mainHeading: "教育与经历",
-        frTitle: "独立学生", frLoc: "法国波尔多", frBullet1: "在法国继续进行法语语言提升与学术准备。", frBullet2: "完全独立地处理行政、搬迁以及教育流程。", frBullet3: "在全新的语言环境中不断培养高水平的适应能力与实际问题解决策略。",
+        frTitle: "独立学生", frLoc: "法国波尔多", frBullet1: "在法国继续进行法语语言提升与学术准备。", frBullet2: "完全独立地处理行政、搬迁以及教育流程。", frBullet3: "在全新的语言环境中不断培养高水平 of 适应能力与实际问题解决策略。",
         zhTitle: "语言留学生", zhLoc: "西安交通大学 (XJTU) — 中国西安", zhBullet1: "在密集的国际化封闭式学术环境中学习普通话。", zhBullet2: "成功考取汉办普通话 HSK 4 级证书。", zhBullet3: "通过与国际同学通力协作，极大地拓展了跨文化敏纬度与沟通自信心。",
         kwTitle: "优秀毕业生", kwLoc: "高中 — 科威特", kwBullet1: "以 91.93% 的优异累计总分荣登班级毕业生榜首。", kwBullet2: "在所有核心学术科目中均表现出优异的学业成绩与严谨的一致性。", kwBullet3: "打下了坚实的逻辑分析基础，并开启了独立的多语言学习模式。"
       }
