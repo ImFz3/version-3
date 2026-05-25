@@ -462,7 +462,7 @@ h3 {
   .timeline {
     margin-left: 0;
   }
-
+overflow-x: hidden;
   .timeline-item {
     grid-template-columns: 1fr;
   }
@@ -817,4 +817,29 @@ html[dir="rtl"] .map-label {
 }
 .journey-map-svg {
   overflow: visible;
+}
+@media (max-width: 768px) {
+  html[dir="rtl"] .hero {
+    overflow-x: hidden;
+  }
+
+  html[dir="rtl"] .hero-media {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  html[dir="rtl"] .journey-map-svg {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  html[dir="rtl"] .map-label {
+    font-size: 12px;
+    text-anchor: middle;
+  }
+
+  html[dir="rtl"] body {
+    overflow-x: hidden;
+  }
 }
