@@ -809,3 +809,12 @@ h3 {
 [dir="rtl"] .lang-header {
   flex-direction: row-reverse;
 }
+html[dir="rtl"] .map-label {
+  direction: rtl;
+  unicode-bidi: plaintext;
+  text-anchor: middle;
+  font-size: 14px;
+}
+.journey-map-svg {
+  overflow: visible;
+}
