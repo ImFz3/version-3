@@ -82,82 +82,126 @@ const translations = {
     routeBordeauxDesc: "Independent academic preparation and French language immersion,"
   },
   fr: {
-    metaDescription:
-      "Portfolio de Mohammad Faza, etudiant multilingue axe sur la communication, l'adaptabilite, les langues et le travail academique interculturel.",
-    homeAria: "Accueil de Mohammad Faza",
-    portraitAlt: "Portrait de Mohammad Faza",
-    navAria: "Navigation principale",
-    preferencesAria: "Preferences du site",
-    languageAria: "Langue",
-    darkOnAria: "Activer le mode sombre",
-    darkOffAria: "Desactiver le mode sombre",
-    navAbout: "Profil",
-    navJourney: "Parcours",
-    navSkills: "Competences",
-    navContact: "Contact",
-    location: "Bordeaux, France",
-    heroTitle: "Etudiant multilingue construit par les cultures.",
-    heroLead:
-      "Je suis Mohammad Faza, major de promotion et etudiant oriente vers les langues, avec une experience academique au Koweit, en Chine et en France.",
-    getInTouch: "Me contacter",
-    downloadCv: "Telecharger le CV",
-    viewCv: "Voir le CV",
-    heroImageAlt: "Route abstraite reliant le Koweit, Xi'an et Bordeaux avec des points forts linguistiques et academiques",
-    profileEyebrow: "Profil",
-    aboutTitle: "Apprentissage international, autonomie concrete.",
-    aboutBody:
-      "Mon parcours academique m'a appris a m'adapter rapidement, a communiquer entre les langues et a gerer mon apprentissage dans de nouveaux environnements. J'ai termine major de ma classe avec une moyenne cumulative de 91,93 %, tout en continuant a developper mes langues, ma recherche et mon etude autonome a l'etranger.",
-    highlightsAria: "Points forts du portfolio",
-    statAverage: "Moyenne de major de promotion",
-    statLanguages: "Langues de travail",
-    statCountries: "Pays d'etudes",
-    journeyEyebrow: "Formation & experience",
-    journeyTitle: "Un parcours academique cible.",
-    topGraduate: "Major de promotion",
-    kuwaitSchool: "Lycee, Koweit",
-    kuwaitBody:
-      "Diplome major de la classe avec une moyenne cumulative de 91,93 %, montrant une performance solide et constante dans les matieres.",
-    chineseStudent: "Etudiant en chinois",
-    xjtu: "XJTU, Xi'an, Chine",
-    chinaBody:
-      "Etude du mandarin dans un environnement academique international, avec progres en communication, confiance interculturelle et autonomie.",
-    independentStudent: "Etudiant independant",
-    france: "France",
-    franceBody:
-      "Poursuite du developpement en francais et preparation academique, tout en gerant de facon autonome les demarches educatives et administratives en France.",
-    capabilities: "Capacites",
-    skillsTitle: "Maitrise linguistique et habitudes d'etude adaptables.",
-    languages: "Langues",
-    arabic: "Arabe",
-    english: "Anglais",
-    french: "Francais",
-    mandarin: "Mandarin",
-    native: "Langue maternelle",
-    fluent: "Courant",
-    intermediate: "A1-A2 / Débutant",
-    coreSkills: "Competences cles",
-    skillsAria: "Competences",
-    skillCommunication: "Communication multilingue",
-    skillAdaptability: "Adaptabilite",
-    skillIndependent: "Apprentissage autonome",
-    skillProblem: "Resolution de problemes",
-    skillResearch: "Recherche",
-    skillCulture: "Collaboration interculturelle",
-    contactEyebrow: "Contact",
-    contactTitle: "Ouvert aux opportunites academiques et professionnelles.",
-    email: "Email",
-    phone: "Telephone",
-    locationLabel: "Localisation",
-    routeKuwaitLabel: "Koweït",
+  metaDescription:
+    "Portfolio de Mohammad Faza, étudiant multilingue spécialisé dans la communication, l’adaptation, l’apprentissage des langues et le travail académique interculturel.",
+  homeAria: "Accueil Mohammad Faza",
+  portraitAlt: "Portrait de Mohammad Faza",
+  navAria: "Navigation principale",
+  preferencesAria: "Préférences du site",
+  languageAria: "Langue",
+  darkOnAria: "Activer le mode sombre",
+  darkOffAria: "Désactiver le mode sombre",
+
+  navAbout: "À propos",
+  navJourney: "Parcours",
+  navSkills: "Compétences",
+  navContact: "Contact",
+
+  location: "Bordeaux, France",
+
+  heroTitle: "Étudiant multilingue évoluant entre plusieurs cultures.",
+
+  heroLead:
+    "Je suis Mohammad Faza, major de promotion et étudiant passionné par les langues, avec une expérience académique au Koweït, en Chine et en France.",
+
+  getInTouch: "Me contacter",
+  downloadCv: "Télécharger le CV",
+  viewCv: "Voir le CV",
+
+  heroImageAlt:
+    "Illustration reliant le Koweït, Xi’an et Bordeaux avec des éléments académiques et linguistiques.",
+
+  profileEyebrow: "Profil",
+
+  aboutTitle: "Apprentissage international et autonomie pratique.",
+
+  aboutBody:
+    "Mon parcours académique m’a appris à m’adapter rapidement, à communiquer dans plusieurs langues et à évoluer dans de nouveaux environnements. Diplômé major de promotion avec une moyenne générale de 91,93 %, j’ai poursuivi le développement de mes compétences linguistiques, académiques et de recherche à l’international.",
+
+  highlightsAria: "Points forts du portfolio",
+
+  statAverage: "Moyenne de major de promotion",
+  statLanguages: "Langues maîtrisées",
+  statCountries: "Pays d’études",
+
+  journeyEyebrow: "Formation & Expérience",
+
+  journeyTitle: "Un parcours académique structuré.",
+
+  topGraduate: "Major de promotion",
+
+  kuwaitSchool: "Lycée, Koweït",
+
+  kuwaitBody:
+    "Diplômé major de promotion avec une moyenne générale de 91,93 %, démontrant d’excellents résultats et une grande régularité académique.",
+
+  chineseStudent: "Étudiant en langue chinoise",
+
+  xjtu: "XJTU, Xi’an, Chine",
+
+  chinaBody:
+    "Étude du mandarin dans un environnement académique international, avec développement des compétences interculturelles, de la communication et de l’autonomie.",
+
+  independentStudent: "Étudiant indépendant",
+
+  france: "France",
+
+  franceBody:
+    "Poursuite de l’apprentissage du français et de la préparation académique tout en gérant de manière autonome les démarches administratives et éducatives en France.",
+
+  capabilities: "Compétences",
+
+  skillsTitle: "Maîtrise des langues et techniques d’apprentissage flexibles.",
+
+  languages: "Langues",
+
+  arabic: "Arabe",
+  english: "Anglais",
+  french: "Français",
+  mandarin: "Mandarin",
+
+  native: "Langue maternelle",
+  fluent: "Courant",
+  intermediate: "A1-A2 / Débutant",
+
+  coreSkills: "Compétences principales",
+
+  skillsAria: "Compétences",
+
+  skillCommunication: "Communication multilingue",
+  skillAdaptability: "Capacité d’adaptation",
+  skillIndependent: "Apprentissage autonome",
+  skillProblem: "Résolution de problèmes",
+  skillResearch: "Recherche académique",
+  skillCulture: "Collaboration interculturelle",
+
+  contactEyebrow: "Contact",
+
+  contactTitle:
+    "Ouvert aux opportunités académiques et professionnelles.",
+
+  email: "E-mail",
+  phone: "Téléphone",
+  locationLabel: "Localisation",
+
+  routeKuwaitLabel: "Koweït",
   routeKuwaitTitle: "Koweït",
-  routeKuwaitDesc: "Diplômé major de promotion (91,93 %). Solides bases académiques établies.",
-  routeXianLabel: "Xi'an",
-  routeXianTitle: "Xi'an, Chine",
-  routeXianDesc: "Études intensives de mandarin à l'XJTU. Niveau de compétence HSK 4 atteint.",
+
+  routeKuwaitDesc:
+    "Diplômé major de promotion avec une moyenne de 91,93 %. Construction de solides bases académiques.",
+
+  routeXianLabel: "Xi’an",
+  routeXianTitle: "Xi’an, Chine",
+
+  routeXianDesc:
+    "Études intensives de mandarin à XJTU avec obtention du niveau HSK 4.",
+
   routeBordeauxLabel: "Bordeaux",
   routeBordeauxTitle: "Bordeaux, France",
-  routeBordeauxDesc: "Préparation académique indépendante et immersion linguistique en français.",
-  },
+
+  routeBordeauxDesc:
+    "Préparation académique indépendante et immersion complète dans la langue française."
+},
   ar: {
     metaDescription:
       "ملف محمد فزع الشخصي، طالب متعدد اللغات يركز على التواصل والقدرة على التكيف وتعلم اللغات والعمل الأكاديمي بين الثقافات.",
